@@ -9,12 +9,17 @@
 </head>
 <body>
 
+  <header class="site-header">
+    <a class="wordmark" href="#rsvp-card" aria-label="RSVP card"><span aria-hidden="true">↗</span> RSVP</a>
+    <span class="site-caption">A little less planning. A little more party.</span>
+  </header>
   <main class="page">
 
     <!-- the RSVP card -->
     <div class="card" id="rsvp-card">
 
       <div class="event-header">
+        <p class="eyebrow">You’re invited</p>
         <h1 class="event-title">End of Semester Party</h1>
         <p class="event-meta">Friday, May 9 &middot; 7pm &middot; Someone's Rooftop</p>
       </div>
@@ -22,7 +27,7 @@
       <!-- string: name -->
       <div class="field">
         <label for="name-input">Your name</label>
-        <input type="text" id="name-input" placeholder="First name is fine" autocomplete="given-name">
+        <input type="text" id="name-input" placeholder="First name is fine" autocomplete="given-name" maxlength="80">
       </div>
 
       <!-- boolean: going or not -->
@@ -45,13 +50,47 @@
         <div class="confirmation hidden" id="confirmation"></div>
         <div class="regret hidden" id="regret"></div>
       </div>
-      <p class="demo-note">Practice card only. Your response stays on this page and is not sent or saved.</p>
+      <div class="draft-controls">
+        <label class="checkbox-label" for="remember-draft">
+          <input type="checkbox" id="remember-draft" aria-describedby="draft-status">
+          Remember my draft on this browser
+        </label>
+        <p class="field-hint" id="draft-status" role="status">Off by default. Nothing is saved unless you choose this.</p>
+      </div>
+      <div class="reset-row">
+        <button class="text-button" id="reset-button" type="button">Reset response</button>
+        <button class="text-button hidden" id="undo-button" type="button">Undo reset</button>
+      </div>
+      <p class="action-status" id="action-status" role="status"></p>
+      <p class="demo-note">Practice invitation. No response is sent to an organizer.</p>
       <noscript><p>This card needs JavaScript to update your response. Enable JavaScript and reload the page to try it.</p></noscript>
 
     </div>
 
-    <!-- original assignment tasks -->
-    <aside class="tasks-panel">
+    <aside class="summary-panel" aria-labelledby="summary-title">
+      <div class="ticket">
+        <div class="ticket-top"><p class="eyebrow">Your response</p><span class="status-pill" id="summary-status">Not selected</span></div>
+        <h2 id="summary-title">A spot for good company.</h2>
+        <p class="summary-intro">Choose a response and see your details come together here.</p>
+        <dl class="summary-details">
+          <div><dt>Name</dt><dd id="summary-name">Your name goes here</dd></div>
+          <div><dt>Attendance</dt><dd id="summary-choice">Choose Going or Can't make it</dd></div>
+          <div><dt>Your party</dt><dd id="summary-party">No response yet</dd></div>
+        </dl>
+        <div class="ticket-footer">
+          <span class="ticket-mark" aria-hidden="true">R / S / V / P</span>
+          <p>Your plans, at a glance.</p>
+        </div>
+      </div>
+      <button class="download-button" id="download-button" type="button" disabled>Download response <span aria-hidden="true">↓</span></button>
+      <p class="field-hint" id="download-hint">Choose a response to download a text copy.</p>
+      <p class="privacy-note">Your details stay here. An optional draft is stored only in this browser. You can clear it with Reset response.</p>
+    </aside>
+
+    <!-- keep the supplied tasks available without competing with the invitation -->
+    <details class="task-reference">
+      <summary>Behind the interaction <span>The original class tasks</span></summary>
+      <div class="tasks-panel">
 
       <h2>Tutorial 4: Make HTML Interactive</h2>
       <p class="intro">
@@ -137,9 +176,11 @@
         </p>
       </div>
 
-    </aside>
+      </div>
+    </details>
 
   </main>
+  <footer class="site-footer">Built from the Tutorial 4 starter · HTML, CSS &amp; JavaScript <a href="https://github.com/kennethyeaher/addingJava">View the project ↗</a></footer>
 
   <script src="script.js"></script>
 </body>
