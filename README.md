@@ -2,6 +2,8 @@
 
 An INST630 JavaScript exercise built from the supplied Tutorial 4 starter files. The card responds to a person's attendance choice, name, and guest count without reloading the page.
 
+[Open the RSVP card](https://kennethyeaher.github.io/addingJava/tutorial_4_files/)
+
 ## Run it
 
 Open `tutorial_4_files/index.html` in a browser, or open the folder in VS Code and use Live Server. There are no packages to install or build steps.
@@ -86,7 +88,7 @@ JavaScript syntax and Git whitespace checks passed. These checks do not establis
 
 ## GitHub Pages
 
-When this repository is published, configure Pages to deploy from `main` and `/ (root)`. The card's path is `tutorial_4_files/`. Submit the live card URL after checking the Pages deployment, rather than a GitHub source file URL.
+GitHub Pages deploys from `main` and `/ (root)`. The card is at [kennethyeaher.github.io/addingJava/tutorial_4_files/](https://kennethyeaher.github.io/addingJava/tutorial_4_files/). Use that link for the assignment submission.
 
 ## Starter source
 
