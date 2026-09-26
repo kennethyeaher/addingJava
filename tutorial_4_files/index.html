@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 4: JavaScript Fundamentals</title>
+  <title>RSVP Card | JavaScript Fundamentals</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23fcd44b'/%3E%3Cpath d='m16 33 10 10 22-24' fill='none' stroke='%231a1917' stroke-width='6'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="page">
+  <main class="page">
 
-    <!-- ── left: the RSVP card ──────────────────────────────── -->
+    <!-- the RSVP card -->
     <div class="card" id="rsvp-card">
 
       <div class="event-header">
@@ -21,38 +22,41 @@
       <!-- string: name -->
       <div class="field">
         <label for="name-input">Your name</label>
-        <input type="text" id="name-input" placeholder="First name is fine">
+        <input type="text" id="name-input" placeholder="First name is fine" autocomplete="given-name">
       </div>
 
       <!-- boolean: going or not -->
-      <div class="rsvp-buttons">
-        <button class="btn btn-yes" id="btn-yes">Going</button>
-        <button class="btn btn-no"  id="btn-no">Can't make it</button>
+      <div class="rsvp-buttons" role="group" aria-label="Will you attend?">
+        <button class="btn btn-yes" id="btn-yes" type="button" aria-pressed="false">Going</button>
+        <button class="btn btn-no"  id="btn-no" type="button" aria-pressed="false">Can't make it</button>
       </div>
 
       <!-- number: guest count, hidden until yes -->
       <div class="guest-field hidden" id="guest-field">
         <label for="guest-input">Bringing anyone?</label>
-        <input type="number" id="guest-input" value="0" min="0" max="10">
-        <!-- 
-          Note: type="number" still gives you a STRING from .value
-          You have to convert it. We'll see this below.
-        -->
+        <input type="number" id="guest-input" value="0" min="0" max="10" step="1" required aria-invalid="false" aria-describedby="guest-hint guest-error">
+        <p class="field-hint" id="guest-hint">0 to 10 additional guests. Leave 0 if it's just you.</p>
+        <p class="field-error" id="guest-error" role="alert"></p>
+        <p class="guest-total" id="guest-total"></p>
       </div>
 
       <!-- confirmation messages, hidden until a choice is made -->
-      <div class="confirmation hidden" id="confirmation"></div>
-      <div class="regret     hidden" id="regret"></div>
+      <div class="response" role="status" aria-atomic="true">
+        <div class="confirmation hidden" id="confirmation"></div>
+        <div class="regret hidden" id="regret"></div>
+      </div>
+      <p class="demo-note">Practice card only. Your response stays on this page and is not sent or saved.</p>
+      <noscript><p>This card needs JavaScript to update your response. Enable JavaScript and reload the page to try it.</p></noscript>
 
     </div>
 
-    <!-- ── right: tasks panel ───────────────────────────────── -->
+    <!-- original assignment tasks -->
     <aside class="tasks-panel">
 
       <h2>Tutorial 4: Make HTML Interactive</h2>
       <p class="intro">
-        This RSVP card has all its HTML and CSS but no behavior yet. <br />
-        Let's wire up the JavaScript so it responds to the user.
+        This completed card uses the five tasks below. Try a response, then
+        change your name or guest count to see the message update.
       </p>
 
       <div class="task-group">
@@ -135,7 +139,7 @@
 
     </aside>
 
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
