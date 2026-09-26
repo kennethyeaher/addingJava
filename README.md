@@ -156,3 +156,14 @@ PDF page positions are listed because they differ from printed page numbers. The
 The starter HTML, CSS, event details, task wording, and initial JavaScript scaffold come from the course's `tutorial_4_files.zip`. The assignment also references the [in-class CodePen demo](https://codepen.io/Alex-Leitch/pen/MYjWxdZ).
 
 **Submission link:** [kennethyeaher.github.io/addingJava/tutorial_4_files/](https://kennethyeaher.github.io/addingJava/tutorial_4_files/)
+
+---
+
+## Author
+
+**Kenneth Yeaher**  
+MS in Human Computer Interaction  
+University of Maryland, College Park  
+[![LinkedIn: Kenneth Yeaher](https://img.shields.io/badge/LinkedIn-Kenneth_Yeaher-0A66C2?style=flat)](https://www.linkedin.com/in/kennethyeaher/)
+
+`JavaScript` · `Interaction Design` · `HTML and CSS`
