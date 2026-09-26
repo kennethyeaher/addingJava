@@ -7,10 +7,13 @@
   Choose a response, bring a guest, save a draft, and change your mind.
 </p>
 
+![HTML5](docs/readme/badges/html5-E34F26.svg)
+![CSS](docs/readme/badges/css-663399.svg)
+![JavaScript](docs/readme/badges/javascript-B89B00.svg)
+
 <p align="center">
   <a href="https://kennethyeaher.github.io/addingJava/tutorial_4_files/"><img alt="Open live demo" src="https://img.shields.io/badge/demo-live-304bb0?style=flat-square"></a>
   <a href="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml"><img alt="Browser checks" src="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml/badge.svg"></a>
-  <img alt="JavaScript ES2020+" src="https://img.shields.io/badge/JavaScript-ES2020%2B-f4d578?style=flat-square&amp;labelColor=202a44">
   <img alt="No runtime dependencies" src="https://img.shields.io/badge/runtime_dependencies-0-304bb0?style=flat-square">
 </p>
 
@@ -47,6 +50,12 @@ An INST630 project built from the supplied Tutorial 4 starter. The required DOM 
 | **Repeatable browser checks** | Exercises the class criteria and added features on each push | Isolated browser contexts, failure cases, responsive checks, and continuous integration |
 
 **Boundaries are deliberate.** This is a practice invitation, not an event registration service. No response is sent to an organizer. Saving is off by default. If enabled, the draft stays in that browser's local storage until saving is turned off or the response is reset. Undo is available until the next edit or reload. There is no account, server database, or attendance count across people.
+
+## A short walkthrough
+
+Open the card and choose **Going** to reveal the guest field. Change the response and watch the summary update. Try an invalid guest count, then correct it using the inline guidance. The optional draft and reset recovery flows are useful places to inspect how the interface handles interrupted input.
+
+The implementation and browser checks are linked below; the screenshots show selected states rather than every possible interaction.
 
 ## Class requirements
 
