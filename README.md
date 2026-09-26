@@ -1,95 +1,158 @@
-# RSVP Card
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="RSVP. An invitation, a response, all in the browser." width="100%">
+</p>
 
-An INST630 JavaScript exercise built from the supplied Tutorial 4 starter files. The card responds to a person's attendance choice, name, and guest count without reloading the page.
+<p align="center">
+  <strong>A small JavaScript exercise, extended into a complete interaction.</strong><br>
+  Choose a response, bring a guest, save a draft, and change your mind.
+</p>
 
-[Open the RSVP card](https://kennethyeaher.github.io/addingJava/tutorial_4_files/)
+<p align="center">
+  <a href="https://kennethyeaher.github.io/addingJava/tutorial_4_files/"><img alt="Open live demo" src="https://img.shields.io/badge/demo-live-304bb0?style=flat-square"></a>
+  <a href="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml"><img alt="Browser checks" src="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml/badge.svg"></a>
+  <img alt="JavaScript ES2020+" src="https://img.shields.io/badge/JavaScript-ES2020%2B-f4d578?style=flat-square&amp;labelColor=202a44">
+  <img alt="No runtime dependencies" src="https://img.shields.io/badge/runtime_dependencies-0-304bb0?style=flat-square">
+</p>
 
-## Run it
+<p align="center">
+  <a href="https://kennethyeaher.github.io/addingJava/tutorial_4_files/"><strong>Try the card ↗</strong></a> &nbsp; · &nbsp;
+  <a href="#class-requirements">Class requirements</a> &nbsp; · &nbsp;
+  <a href="#run-locally">Run locally</a> &nbsp; · &nbsp;
+  <a href="#verification">Verification</a>
+</p>
 
-Open `tutorial_4_files/index.html` in a browser, or open the folder in VS Code and use Live Server. There are no packages to install or build steps.
+---
 
-For a local server, run this from the repository folder:
+## The interaction
+
+An INST630 project built from the supplied Tutorial 4 starter. The required DOM interactions remain at the center: exclusive attendance choices, a conditional guest field, and messages that update as someone types. The extensions explore what happens after the happy path: an invalid count, an interrupted response, an accidental reset, or unavailable browser storage.
+
+<img src="docs/assets/preview-1440.png" alt="Desktop RSVP card showing Going selected, two guests, and a live response summary with a download action." width="100%">
+
+<details>
+<summary><strong>See the mobile layout</strong></summary>
+<br>
+<p align="center"><img src="docs/assets/preview-375.png" alt="Mobile RSVP card with stacked attendance buttons and the response summary below the form." width="320"></p>
+</details>
+
+## Beyond the brief
+
+| Extension | What it does | What the implementation demonstrates |
+| --- | --- | --- |
+| **Optional saved drafts** | Restores the name, choice, and guest count after a reload | Explicit storage consent, versioned data, schema checks, and failure handling |
+| **Reset with Undo** | Clears the response and saved draft, then offers one recovery step | State snapshots, predictable transitions, and recovery from mistakes |
+| **Downloadable response** | Exports a valid attendance response as a text file | Blob creation, temporary URL cleanup, and validation before an action |
+| **Live response summary** | Reflects the current choice and party total | Consistent rendering from shared state |
+| **Accessible feedback** | Exposes button state, errors, and response changes | Native controls, `aria-pressed`, status regions, keyboard focus, and reduced motion |
+| **Repeatable browser checks** | Exercises the class criteria and added features on each push | Isolated browser contexts, failure cases, responsive checks, and continuous integration |
+
+**Boundaries are deliberate.** This is a practice invitation, not an event registration service. No response is sent to an organizer. Saving is off by default. If enabled, the draft stays in that browser's local storage until saving is turned off or the response is reset. Undo is available until the next edit or reload. There is no account, server database, or attendance count across people.
+
+## Class requirements
+
+Every submission criterion is preserved in [`script.js`](tutorial_4_files/script.js) and covered by [`tests/rsvp.test.cjs`](tests/rsvp.test.cjs).
+
+| Submission criterion | Where to look |
+| --- | --- |
+| Only one Going / Can't make it button is active | `chooseGoing()`, `chooseNotGoing()`, and `updateResponse()` |
+| Guest count appears only after Going | `guestField.classList.toggle('hidden', !isGoing)` |
+| Confirmation or regret includes the person's name | `getName()`, `updateConfirmation()`, and `updateRegret()` |
+| Text updates while typing | `input` listeners on the name and guest fields |
+| Contemporary DOM selection and events | `document.querySelector()` and `addEventListener()` |
+
+The exercise's learning goals are also visible directly in the code:
+
+- **Boolean:** `isGoing` and `isNotGoing` track attendance. Both are false initially and after a reset.
+- **String:** `.value`, `.trim()`, template literals, and `textContent` build safe, readable messages.
+- **Number:** `Number(guestInput.value)` converts the guest count before comparisons and addition.
+- **CSS classes:** `classList.add()`, `remove()`, and `toggle()` update visibility and selected states.
+
+The original class instructions remain on the page under **Behind the interaction**. The original starter files are preserved in the first commit. The blank-name fallback remains `Someone`, and guest counts use separate wording for zero, one, and multiple guests.
+
+## Run locally
+
+**To use the card:** open `tutorial_4_files/index.html` directly, or use VS Code's Live Server. No installation or build is needed for the application. Use a local server for consistent draft storage behavior across browsers:
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000/tutorial_4_files/`.
+Open **[localhost:8000/tutorial_4_files/](http://localhost:8000/tutorial_4_files/)**.
 
-## What it does
+**To run the checks:** use Node.js 22 or newer. Playwright is a development dependency only.
 
-- Going and Can't make it are mutually exclusive. Neither is selected initially.
-- Going reveals the guest field and a confirmation. Can't make it hides the guest field and shows a regret message.
-- Messages update as the name or guest count changes.
-- Blank names use the starter's Someone fallback.
-- Guest counts use separate wording for zero, one, and multiple guests.
-- The party total adds one for the person responding. It is not an event attendance total.
-- Empty, negative, fractional, and over-limit guest counts show an error. The card does not confirm an invalid count.
-- Switching choices preserves the name and guest count. Reloading starts over.
+```sh
+npm ci
+npx playwright install chromium
+npm run check
+npm test
+```
 
-This is a practice card. Responses are not sent, stored, or shared with an event organizer. The event details are retained from the supplied starter.
+The test suite starts and stops its own local server. To use an installed Chrome browser instead:
 
-## Files
+```sh
+BROWSER_CHANNEL=chrome npm test
+```
 
-| File | Purpose |
+## Verification
+
+Ten browser tests cover the behavior below. The badge at the top links to the current hosted result.
+
+| Coverage | Cases |
 | --- | --- |
-| `tutorial_4_files/index.html` | Card structure, labels, feedback, and original assignment tasks |
-| `tutorial_4_files/style.css` | Layout, button states, responsive rules, and focus indicators |
-| `tutorial_4_files/script.js` | Attendance state, messages, validation, and event listeners |
+| Assignment behavior | Initial state, exclusive choices, live names, guest visibility, 0 / 1 / many guests, boolean / string / number types |
+| Input safety | Blank and whitespace names, literal markup, empty / negative / fractional / excessive guest counts |
+| Draft lifecycle | Opt in, reload, opt out, invalid stored data, blocked storage |
+| Recovery | Reset, saved-data removal, Undo, cancellation of Undo after another edit |
+| Downloads | Correct file name and content for attending and declining; unavailable for invalid or unselected responses |
+| Accessibility and layout | Keyboard operation, accessible selection states, 320–1440 px widths, expanded task panel, 200% text, forced colors, reduced motion, JavaScript-disabled notice |
 
-The first commit preserves the starter files. Later commits implement the interactions, improve usability, and document the finished exercise.
+Local checks ran in Chrome. GitHub Actions runs the same suite in Chromium. Desktop and mobile screenshots are actual browser captures. Automated checks do not establish full accessibility conformance; Safari, Firefox, and VoiceOver have not been tested.
 
-## JavaScript concepts
+<details>
+<summary><strong>A quick manual walkthrough</strong></summary>
 
-| Requirement | Implementation |
-| --- | --- |
-| Select DOM elements | `document.querySelector()` stores references to the card controls |
-| Respond to clicks | Named handlers registered with `addEventListener('click', ...)` select attendance |
-| Respond to typing | `input` listeners refresh the selected response |
-| Change styling | `classList.add()`, `remove()`, and `toggle()` control active and hidden states |
-| Change displayed text | `textContent` inserts messages as text, including user input |
-| Read input | `.value` reads the name and guest fields |
-| Boolean | `isGoing` and `isNotGoing` track the selected choice |
-| String | The trimmed name and template literals build each message |
-| Number | `Number(guestInput.value)` converts the input before comparison and addition |
+1. Type a name and select Going. Only Going should be active.
+2. Change the guest count to 0, 1, and 3. Check the wording and party total.
+3. Enter -1, 1.5, 11, or an empty count. Check the error and disabled download.
+4. Choose Can't make it, then change the name. The regret text should update.
+5. Enable Remember my draft and reload. Check that the response returns.
+6. Reset the response, then choose Undo reset. Check that the previous response returns.
+7. Download the response and read the text file.
+8. Repeat the core flow with Tab, Enter, and Space.
 
-Both booleans are retained to match the exercise. The click handlers set them together so only one can be true. Both are false before a response and after a reset.
+`checkStatus()` returns current values and types in the browser console. `resetCard()` resets the same state as the visible Reset response button.
 
-In the browser console, `checkStatus()` returns the current values and data types. `resetCard()` clears the card. These helpers do not run automatically or send data anywhere.
+</details>
 
-## Design choices
+## Project structure
 
-The supplied layout and task panel remain recognizable. The main changes support completing and checking the interaction:
+```text
+addingJava/
+├── tutorial_4_files/
+│   ├── index.html             # structure and original class tasks
+│   ├── style.css              # layout, states, and responsive rules
+│   └── script.js              # interactions, drafts, recovery, and export
+├── tests/rsvp.test.cjs        # browser behavior checks
+├── .github/workflows/        # hosted verification
+├── docs/assets/              # banner and actual interface screenshots
+└── package.json              # development checks only
+```
 
-- The guest field appears only after Going. This applies progressive disclosure: show the next relevant control when it is needed.
-- Zero is the default guest count, so a person attending alone does not need to change it.
-- A nearby hint states the guest range, and errors explain how to correct invalid entries.
-- Button state is exposed through `aria-pressed`. A status region contains the response, and keyboard focus has a visible outline.
-- At narrow widths, the buttons stack and the card stops sticking to the top of the screen.
+## Design decisions
 
-These choices draw on *Designing Interfaces: Patterns for Effective Interaction Design*, 3rd edition, by Jenifer Tidwell, Charles Brewer, and Aynne Valencia: Chapter 4, Progressive Disclosure, and Chapter 10, Good Defaults and Smart Prefills, Input Hints, and Error Messages. The supplied PDF's page 168 discusses revealing steps progressively; page 795 explains the purpose of reasonable defaults. These are PDF page positions, not printed page numbers.
+The response summary borrows the structure of a detachable invitation: shared colors, a clear information hierarchy, and a perforated divider. A serif event heading gives the invitation character; system text keeps the controls readable. The original event details remain unchanged.
 
-## Check the behavior
+The interaction follows ideas from *Designing Interfaces: Patterns for Effective Interaction Design*, 3rd edition, by Jenifer Tidwell, Charles Brewer, and Aynne Valencia:
 
-1. Load the page. Neither button should be active, and the guest field should be hidden.
-2. Enter a name and choose Going. Check the name appears in the confirmation.
-3. Try guest counts 0, 1, 3, and 10. Check the wording and party total.
-4. Try an empty count, -1, 1.5, and 11. An error should replace the confirmation.
-5. Enter a valid count again. The error should clear.
-6. Choose Can't make it. Only that button should be active; the guest field should disappear.
-7. Change the name. The regret message should update immediately.
-8. Clear the name or enter only spaces. The message should use Someone.
-9. Use Tab, Enter, and Space to choose responses without a mouse.
-10. Run `resetCard()` in the console. Inputs, messages, and selected states should clear.
+- **Progressive Disclosure:** reveal the guest field only when attending. The supplied PDF discusses revealing relevant steps on PDF page 168.
+- **Good Defaults and Smart Prefills:** start additional guests at zero. The pattern is explained on PDF page 795.
+- **Input Hints and Error Messages:** put the allowed range beside the field and explain how to correct an invalid value.
 
-Automated Chrome checks passed for these interactions, state and input types, literal display of markup in names, preserved guest counts, and reload behavior. Layout checks passed without horizontal overflow at 320, 375, 480, 768, 1024, and 1440 pixels, including 200% text at 320 pixels. Desktop and mobile screenshots were inspected. Forced color selection styling, the notice shown when JavaScript is disabled, and the browser console were also checked.
+PDF page positions are listed because they differ from printed page numbers. The optional draft and Undo features extend the exercise without adding a framework or changing its basic HTML, CSS, and JavaScript separation.
 
-JavaScript syntax and Git whitespace checks passed. These checks do not establish Safari, Firefox, or VoiceOver behavior; those have not been tested.
+## Source and submission
 
-## GitHub Pages
+The starter HTML, CSS, event details, task wording, and initial JavaScript scaffold come from the course's `tutorial_4_files.zip`. The assignment also references the [in-class CodePen demo](https://codepen.io/Alex-Leitch/pen/MYjWxdZ).
 
-GitHub Pages deploys from `main` and `/ (root)`. The card is at [kennethyeaher.github.io/addingJava/tutorial_4_files/](https://kennethyeaher.github.io/addingJava/tutorial_4_files/). Use that link for the assignment submission.
-
-## Starter source
-
-The HTML, CSS, task wording, event details, and initial JavaScript scaffold come from the course's `tutorial_4_files.zip`. The completed behavior and usability changes build on those materials. The assignment also links to the [in-class CodePen demo](https://codepen.io/Alex-Leitch/pen/MYjWxdZ).
+**Submission link:** [kennethyeaher.github.io/addingJava/tutorial_4_files/](https://kennethyeaher.github.io/addingJava/tutorial_4_files/)

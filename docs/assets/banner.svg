@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title description">
+  <title id="title">RSVP</title>
+  <desc id="description">An RSVP card that responds as you type. JavaScript, thoughtful feedback, and room for a plus one.</desc>
+  <rect width="1200" height="320" rx="20" fill="#202a44"/>
+  <path d="M58 0v320M1142 0v320" stroke="#52617c" stroke-dasharray="5 9"/>
+  <circle cx="58" cy="160" r="16" fill="#ffffff"/>
+  <circle cx="1142" cy="160" r="16" fill="#ffffff"/>
+  <circle cx="444" cy="119" r="36" fill="#f4d578"/>
+  <path d="M432 131l24-24m-22 0h22v22" fill="none" stroke="#202a44" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="141" fill="#ffffff" font-family="Arial,Helvetica,sans-serif" font-size="64" font-weight="700" letter-spacing="8">RSVP</text>
+  <text x="600" y="212" fill="#e8edff" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24">An invitation. A response. All in the browser.</text>
+  <text x="600" y="261" fill="#f4d578" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="3">LIVE FEEDBACK · OPTIONAL DRAFTS · A LITTLE ROOM FOR RECOVERY</text>
+</svg>
