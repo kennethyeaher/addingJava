@@ -7,14 +7,13 @@
   Choose a response, bring a guest, save a draft, and change your mind.
 </p>
 
-![HTML5](docs/readme/badges/html5-E34F26.svg)
-![CSS](docs/readme/badges/css-663399.svg)
-![JavaScript](docs/readme/badges/javascript-B89B00.svg)
-
 <p align="center">
-  <a href="https://kennethyeaher.github.io/addingJava/tutorial_4_files/"><img alt="Open live demo" src="https://img.shields.io/badge/demo-live-304bb0?style=flat-square"></a>
-  <a href="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml"><img alt="Browser checks" src="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml/badge.svg"></a>
-  <img alt="No runtime dependencies" src="https://img.shields.io/badge/runtime_dependencies-0-304bb0?style=flat-square">
+  <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white">
+  <img alt="CSS" src="https://img.shields.io/badge/CSS-663399?style=flat-square&logo=css&logoColor=white">
+  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-B89B00?style=flat-square&logo=javascript&logoColor=white">
+  <a href="https://kennethyeaher.github.io/addingJava/tutorial_4_files/"><img alt="Live demo" src="https://img.shields.io/badge/demo-live-304bb0?style=flat-square"></a>
+  <a href="https://github.com/kennethyeaher/addingJava/actions/workflows/browser-checks.yml"><img alt="Browser checks status" src="https://img.shields.io/github/actions/workflow/status/kennethyeaher/addingJava/browser-checks.yml?branch=main&style=flat-square&label=browser%20checks"></a>
+  <img alt="No runtime dependencies" src="https://img.shields.io/badge/runtime%20dependencies-0-304bb0?style=flat-square">
 </p>
 
 <p align="center">
